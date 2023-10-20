@@ -41,10 +41,6 @@ public class TypeTontineServiceImpl implements TypeTontineService {
         ) ;
     }
 
-
-
-
-
     public void update(Long id, TypeTontine typeTontine) {
         TypeTontine optionalTypeTontine = this.findById(id);
         optionalTypeTontine.amount = typeTontine.amount;
