@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
-public class ErrorMessage {
+public class ErrorEntity {
     String message;
     Integer code ;
 }

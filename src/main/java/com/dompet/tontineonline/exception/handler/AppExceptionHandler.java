@@ -2,29 +2,33 @@ package com.dompet.tontineonline.exception.handler;
 
 import com.dompet.tontineonline.exception.EntityAlreadyExistsException;
 import com.dompet.tontineonline.exception.EntityNotFoundException;
-import com.dompet.tontineonline.exception.message.ErrorMessage;
+import com.dompet.tontineonline.exception.message.ErrorEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@RestControllerAdvice
+@ControllerAdvice
 public class AppExceptionHandler {
-
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = {EntityNotFoundException.class})
-    public ResponseEntity<Object> entityNotFoundException(EntityNotFoundException exception){
-        ErrorMessage errorMessage =  ErrorMessage.builder()
-                .message(exception.getMessage())
+    public @ResponseBody ErrorEntity handleException(EntityNotFoundException exception){
+        return  ErrorEntity.builder()
                 .code(404)
-                .build();
-        return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
-    }
-    @ExceptionHandler(value = {EntityAlreadyExistsException.class})
-    public ResponseEntity<Object> entityAlreadyExistsException(EntityAlreadyExistsException exception){
-        ErrorMessage errorMessage =  ErrorMessage.builder()
                 .message(exception.getMessage())
-                .code(409)
                 .build();
-        return new ResponseEntity<>(errorMessage, HttpStatus.CONFLICT);
     }
+
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(value = {EntityAlreadyExistsException.class})
+    public @ResponseBody ErrorEntity handleException(EntityAlreadyExistsException exception){
+        return  ErrorEntity.builder()
+                .code(409)
+                .message(exception.getMessage())
+                .build();
+    }
+
+
+
 }
