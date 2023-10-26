@@ -17,7 +17,7 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    private  static final  String SECRET_KEY = "";
+    private  static final  String SECRET_KEY = "608f36e92dc66d97d5933f0e6371493cb4fc05b1aa8f8de64014732472303a7c";
     public String extractUsername(String token) {
         return extractClaim(token,Claims::getSubject);
 
@@ -27,7 +27,8 @@ public class JwtService {
     }
     public String generateToken(Map<String,Object> extraClaims, UserDetails userDetails){
         final long currentTime = System.currentTimeMillis();
-        final long expirationTime = currentTime + 30 * 60 * 24;
+      //  final long expirationTime = currentTime + 30 * 60 * 24;
+        final long expirationTime = currentTime + 1000 * 60 * 5; //2 minutes
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

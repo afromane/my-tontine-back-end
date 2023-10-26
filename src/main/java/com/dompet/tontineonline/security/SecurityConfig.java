@@ -30,6 +30,7 @@ public class SecurityConfig {
                         .authorizeHttpRequests(
                                 authorize->authorize
                                         .requestMatchers(POST,"/api/v1/user/**").permitAll()
+                                        .requestMatchers(POST,"/api/v1/auth/authenticate").permitAll()
                                         .anyRequest().authenticated()
                         )
                         .sessionManagement(httpSecuritySessionManagementConfigurer ->

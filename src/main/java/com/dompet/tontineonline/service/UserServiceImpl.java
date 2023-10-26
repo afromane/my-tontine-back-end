@@ -8,6 +8,8 @@ import com.dompet.tontineonline.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,7 @@ public class UserServiceImpl  implements  UserService {
         user.setRole(userRole);
         this.userRepository.save(user);
 
-
     }
+
 
 }

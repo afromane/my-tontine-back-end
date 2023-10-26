@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 @Data
 @NoArgsConstructor
-
 public class MembreDTO {
 
     public Long id;
